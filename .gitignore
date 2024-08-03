@@ -1,0 +1,7 @@
+.venv/
+*.db
+*.ini
+**/*.pyc
+
+shell.py
+.projectile
