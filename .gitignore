@@ -3,5 +3,4 @@
 *.ini
 **/*.pyc
 
-shell.py
 .projectile
