@@ -1,5 +1,5 @@
-from sqlalchemy import Boolean, Column, Integer, String
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy import Boolean, Integer, String
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 from app.backend.db import Base
 
 
@@ -16,3 +16,4 @@ class User(Base):
     is_admin: Mapped[bool] = mapped_column(Boolean, default=False)
     is_supplier: Mapped[bool] = mapped_column(Boolean, default=False)
     is_customer: Mapped[bool] = mapped_column(Boolean, default=True)
+    reviews = relationship("Review", back_populates="user")

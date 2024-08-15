@@ -1,7 +1,9 @@
 import datetime
 from sqlalchemy import Boolean, Date, ForeignKey, Integer, SmallInteger, String
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 from app.backend.db import Base
+from app.models.products import Product
+from app.models.user import User
 
 
 class Rating(Base):
@@ -19,6 +21,8 @@ class Rating(Base):
     user_id: Mapped[int] = mapped_column(Integer, ForeignKey('users.id'))
     product_id: Mapped[int] = mapped_column(Integer, ForeignKey('products.id'))
     is_active: Mapped[bool] = mapped_column(Boolean, default=True)
+    reviews: Mapped[list["Review"]] = relationship(back_populates="rating")
+    product: Mapped["Product"] = relationship(back_populates="ratings")
 
 
 class Review(Base):
@@ -41,3 +45,7 @@ class Review(Base):
     comment: Mapped[str] = mapped_column(String)
     comment_date: Mapped[datetime.date] = mapped_column(Date, default=datetime.datetime.now())
     is_active: Mapped[bool] = mapped_column(Boolean, default=True)
+
+    product: Mapped["Product"] = relationship(back_populates="reviews")
+    rating: Mapped["Rating"] = relationship(back_populates="reviews")
+    user: Mapped["User"] = relationship(back_populates="reviews")

@@ -1,10 +1,21 @@
 from IPython import embed
 from app.backend.db import Base
+from sqlalchemy import select, update, insert, delete
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+
+# an Engine, which the Session will use for connection
+# resources, typically in module scope
+engine = create_engine("sqlite:///ecommerce.db", echo=True)
+
+# a sessionmaker(), also in the same scope as the engine
+Session = sessionmaker(engine)
 
 banner = "Additional imports:\n"
 from app.main import app
 
 banner = f"{banner}from app.main import app\n"
+
 
 
 for clazz in Base.registry._class_registry.values():
