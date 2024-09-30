@@ -1,4 +1,4 @@
-from IPython import embed
+afrom IPython import embed
 from app.backend.db import Base
 from sqlalchemy import select, update, insert, delete
 from sqlalchemy import create_engine
@@ -25,3 +25,12 @@ for clazz in Base.registry._class_registry.values():
         banner = banner + import_string
 
 embed(colors="neutral", banner2=banner)
+
+
+# Example
+# from app.models.review import Review
+# with Session() as session:
+#     result = session.scalars(select(Review).where(Review.is_active == True))
+#     for review in result.all():
+#        print(review.rating.grade, review.user.email)
+
